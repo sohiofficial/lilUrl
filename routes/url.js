@@ -3,7 +3,8 @@ const {handleCreateShortId,handleViewHistory,handleRedirectUrl}= require("../con
 const router = express.Router();
 
 router.post("/",handleCreateShortId);
-router.get("/:shortId",handleRedirectUrl)
-router.get("/analytics/:shortId",handleViewHistory);
+router.get("/analytics",handleViewHistory);
+router.get("/:shortId",handleRedirectUrl);
+
 
 module.exports = router;

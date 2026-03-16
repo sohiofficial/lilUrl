@@ -6,11 +6,11 @@
     <title>Home-Page</title>
 </head>
 <body>
+    <h2>lilUrl</h2>
     <!-- create a form that takes in the main url and posts it to create a short ID using a button 
     return the short ID to the front end 
     create a button called show table whith when clicked shows the visit history of all the URLs -->
     <form action = "/lilUrl" method="post">
-        <h2>lilUrl</h2>
         <label> give your URL</label><br>
         <input type = "string"
             name = "redirectUrl"
@@ -22,8 +22,31 @@
     <br>
     <% if (locals.shortId) { %>
      <p>URL generated: <a href="http://localhost:8001/lilUrl/<%= shortId %>">http://localhost:8001/lilUrl/<%= shortId %></a></p>
+     <p>Short ID :<%= shortId %></p>
     <% } %>
     <hr>
-    <button ></button>
+    <form action = "/lilUrl/analytics" method ="get">
+        <label>Enter shortID</label>
+        <input type="string"
+            name="shortId"
+            placeholder="gl6DS_Oh"/>
+        <button type="submit">View History</button>
+    </form>
+    <% if (locals.result) { %>
+     <table>
+        <thead>
+            <th>short ID</th>
+            <th>Main URL</th>
+            <th>Visit History</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%= result.shortId %></td>
+                <td><%= result.redirectUrl %></td>
+                <td><%= result.visitHistory.length %></td>
+            </tr>
+        </tbody>
+     </table>
+    <% } %>
 </body>
 </html>

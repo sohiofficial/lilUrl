@@ -46,12 +46,13 @@ async function handleViewHistory(req, res){
     //get main url from short id 
     //calc the total visit by array length method 
     //return the total visits 
-    const shortId = req.params.shortId;
-    const result = await UrlDb.findOne({shortId})
+    const shortId = req.query.shortId;
+    const result = await UrlDb.findOne({shortId});
     if(!result){
         return res.status(404).json({err:"no url found "})
     }
-    return res.json({msg:`total no. of visits = ${result.visitHistory.length}`})
+    return res.render("home",{result: result})
+    // return res.json({msg:`total no. of visits = ${result.visitHistory.length}`})
 }
 module.exports={
     handleCreateShortId,
