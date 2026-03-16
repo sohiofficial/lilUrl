@@ -7,9 +7,9 @@ async function handleCreateShortId(req, res){
     // store it into db
     // return result 
     
-    const redirectUrl = req.body.mainUrl;
+    const redirectUrl = req.body.redirectUrl;
     if(!redirectUrl){
-        res.status(400).json({err:"URL is required"});
+        return res.status(400).json({err:"URL is required"});
     }
     const check = await UrlDb.findOne({redirectUrl});
 
@@ -19,10 +19,12 @@ async function handleCreateShortId(req, res){
         redirectUrl: redirectUrl,
         visitHistory:[]
         });
-        return res.status(201).json({msg:`short ID created : ${result.shortId}`})
+        // return res.status(201).json({msg:`short ID created : ${result.shortId}`})
+        return res.status(201).render("home",{shortId : result.shortId});
     }else{
         const existingShortId = check.shortId;
-        return res.status(200).json({msg:`short ID already exists : ${existingShortId}`})
+        // return res.status(200).json({msg:`short ID already exists : ${existingShortId}`})
+        return res.status(200).render("home", {shortId: existingShortId});
     }
     
 }
@@ -44,12 +46,13 @@ async function handleViewHistory(req, res){
     //get main url from short id 
     //calc the total visit by array length method 
     //return the total visits 
-    const shortId = req.params.shortId;
-    const result = await UrlDb.findOne({shortId})
+    const shortId = req.query.shortId;
+    const result = await UrlDb.findOne({shortId});
     if(!result){
         return res.status(404).json({err:"no url found "})
     }
-    return res.json({msg:`total no. of visits = ${result.visitHistory.length}`})
+    return res.render("home",{result: result})
+    // return res.json({msg:`total no. of visits = ${result.visitHistory.length}`})
 }
 module.exports={
     handleCreateShortId,
