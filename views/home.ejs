@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home-Page</title>
+</head>
+<body>
+    <!-- create a form that takes in the main url and posts it to create a short ID using a button 
+    return the short ID to the front end 
+    create a button called show table whith when clicked shows the visit history of all the URLs -->
+    <form action = "/lilUrl" method="post">
+        <h2>lilUrl</h2>
+        <label> give your URL</label><br>
+        <input type = "string"
+            name = "redirectUrl"
+            placeholder="https://example.com"
+            required/>
+        
+        <button type="submit">generate</button>
+    </form>
+    <br>
+    <% if (locals.shortId) { %>
+     <p>URL generated: <a href="http://localhost:8001/lilUrl/<%= shortId %>">http://localhost:8001/lilUrl/<%= shortId %></a></p>
+    <% } %>
+    <hr>
+    <button ></button>
+</body>
+</html>
