@@ -1,4 +1,6 @@
 const User = require("../models/users");
+const {v4 : uuidv4}= require("uuid")
+const {setUser, getUser}= require("../services/auth");
 async function handleUserSignup(req, res){
     const {name, email, password} = req.body;
     const result = await User.findOne({email, password});
@@ -17,13 +19,17 @@ async function handleUserSignup(req, res){
 async function handleUserLogin(req, res){
     const {email, password} = req.body;
     const result = await User.findOne({email, password});
-    if(!result){
-        return res.redirect("/signup");
+    const sessionId = uuidv4();
+    setUser(sessionId, result);
+    res.cookie("uid",sessionId);
+    console.log("lalalakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",req.cookies.uid);
+    if(!req.cookies?.uid){
+        return res.redirect("/login");
     }else{
         return res.redirect("/");
     }
-}
-
+    }
+    
 module.exports = {
     handleUserSignup,
     handleUserLogin,
