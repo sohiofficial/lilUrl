@@ -24,6 +24,26 @@
      <p>URL generated: <a href="http://localhost:8001/lilUrl/<%= shortId %>">http://localhost:8001/lilUrl/<%= shortId %></a></p>
      <p>Short ID :<%= shortId %></p>
     <% } %>
+    <br><br>
+    <hr>
+    <% if (locals.userRole === "ADMIN"&& locals.adminUserResult) { %>
+     <table>
+        <thead>
+            <th>Name</th>
+            <th>email</th>
+            <th>role</th>
+        </thead>
+        <tbody>
+            <% adminUserResult.forEach(user => { %>
+             <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.role %></td>
+             </tr>
+            <% }) %>
+        </tbody>
+     </table>
+    <% } %>
     <hr>
     <form action = "/lilUrl/analytics" method ="get">
         <label>Enter shortID</label>
