@@ -1,4 +1,6 @@
 const UrlDb = require("../models/url.js");
+const Users = require("../models/users.js")
+const {setUser, getUser}= require("../services/auth.js");
 const { nanoid }= require("nanoid");
 
 async function handleCreateShortId(req, res){
@@ -48,10 +50,14 @@ async function handleViewHistory(req, res){
     //return the total visits 
     const shortId = req.query.shortId;
     const result = await UrlDb.findOne({shortId});
+    const adminUserResult = await Users.find({});
+    const userToken = req.cookies?.uid;
+    const user = getUser(userToken);
     if(!result){
         return res.status(404).json({err:"no url found "})
     }
-    return res.render("home",{result: result})
+    // console.log("result",result,"\n","userRole",user.role,"\n","adminUserResult",adminUserResult);//made for debugging
+    return res.render("home",{result: result, userRole: user.role, adminUserResult: adminUserResult})
     // return res.json({msg:`total no. of visits = ${result.visitHistory.length}`})
 }
 module.exports={

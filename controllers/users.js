@@ -2,13 +2,14 @@ const User = require("../models/users");
 // const {v4 : uuidv4}= require("uuid")
 const {setUser}= require("../services/auth");
 async function handleUserSignup(req, res){
-    const {name, email, password} = req.body;
+    const {name, email, password, role} = req.body;
     const result = await User.findOne({email, password});
     if(!result){
         await User.create({
         name,
         email,
         password,
+        role
         })
         return res.status(200).redirect("./login");
     }else{
@@ -29,9 +30,7 @@ async function handleUserLogin(req, res){
     // const sessionId = uuidv4();
     // setUser(sessionId, result);
     // res.cookie("uid",sessionId);
-    // console.log("lalalakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",req.cookies.uid);
     }
-    
 module.exports = {
     handleUserSignup,
     handleUserLogin,

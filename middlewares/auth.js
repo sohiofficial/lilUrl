@@ -1,27 +1,30 @@
 const {getUser}= require("../services/auth");
-async function allowLoggedIn(req, res, next){
-    const userUid = req.cookies?.uid;
-    console.log("ALLOWloggedin",userUid);
-    if(!userUid){
-        return res.redirect("/login");
-    }
-    const user = getUser(userUid);
-    console.log("user",user);
-    if (!user){
-        return res.redirect("/login");
-    }
+
+function checkLoggedIn(req, res, next){
+    const userToken = req.cookies?.uid;
+    const user = getUser(userToken);
     req.user = user;
     next();
 }
-async function checkLoggedIn(req, res, next){
-    const userUid = req.cookies?.uid;
-    console.log("CHECKloggedin",userUid);
-    const user = getUser(userUid);
-    console.log("CHECKuser",user);
-    req.user = user;
-    next();
+function restrictTo(...roles){
+    return (req, res, next)=>{
+        const userToken = req.cookies?.uid;
+        // console.log("userToken",userToken);
+        const user = getUser(userToken)
+        // console.log("user",user);
+        if(!userToken || !user){
+            return res.redirect("/login");
+        }
+        // console.log("userRolle",user.role);
+        if(!roles.includes(user.role)){
+            return res.status(401).end("unauthorized");
+        }
+        req.user = user;
+        next();
+    }
 }
+
 module.exports ={
-    allowLoggedIn,
+    restrictTo,
     checkLoggedIn
 }
