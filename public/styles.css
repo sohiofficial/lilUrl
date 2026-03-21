@@ -7,10 +7,10 @@
   --muted: #b8aa8d;
   --line: #4d5578;
 
-  --primary: #c7794a;        /* muted burnt orange */
+  --primary: #c7794a;        
   --primary-hover: #b5693e;
-  --accent: #8aa17b;         /* faded olive */
-  --accent-2: #7fa0b8;       /* dusty cyan */
+  --accent: #8aa17b;        
+  --accent-2: #7fa0b8;       
 
   --radius: 14px;
   --shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
@@ -35,7 +35,6 @@ body {
   line-height: 1.6;
 }
 
-/* subtle grain + scanlines feel */
 body::before {
   content: "";
   position: fixed;
@@ -101,7 +100,6 @@ hr {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
 }
 
-/* make nested form structure feel tighter */
 form {
   display: grid;
   gap: 10px;
