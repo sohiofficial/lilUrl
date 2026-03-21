@@ -13,6 +13,7 @@ mongoDbConnect("mongodb://127.0.0.1:27017/lilUrl");
 
 app.set("view engine", "ejs");
 app.set("views",path.resolve("./views"));
+app.use(express.static(path.resolve("./public")));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());

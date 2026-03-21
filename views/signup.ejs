@@ -4,32 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sign up</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Sign Up</h1>
-    <form action="/users" method="post">
-        <div>
-            <div>
-                <label>Name</label>
-                <input type="text" required name="name" placeholder="lorem ipsum"/>
-            </div>
-            <div>
-                <label>email ID</label>
-                <input type="text" required name="email" placeholder="example@gmail.com"/>
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="text" required name="password"/>
-            </div>
-            <div>
-                <label>Role</label>
-                <input type="text" required name="role"/>
-            </div>
-            <div>
-                <button type="submit">sign up</button>
-            </div>
-        </div>
-        
-    </form>
+    <main class="page">
+        <h1>Sign Up</h1>
+        <section class="card">
+            <form action="/users" method="post">
+                <div>
+                    <div>
+                        <label>Name</label>
+                        <input type="text" required name="name" placeholder="lorem ipsum"/>
+                    </div>
+                    <div>
+                        <label>email ID</label>
+                        <input type="text" required name="email" placeholder="example@gmail.com"/>
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input type="text" required name="password"/>
+                    </div>
+                    <div>
+                        <label>Role</label>
+                        <input type="text" required name="role"/>
+                    </div>
+                    <div>
+                        <button type="submit">sign up</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
 </body>
 </html>

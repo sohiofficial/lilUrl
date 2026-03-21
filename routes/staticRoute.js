@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-router.get("/", (req, res)=>{
+const {restrictTo}= require("../middlewares/auth.js");
+router.get("/", restrictTo("ADMIN", "NORMAL"), (req, res)=>{
     res.render("home");
 })
 router.get("/signup",(req,res)=>{
