@@ -16,6 +16,10 @@ app.set("views",path.resolve("./views"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
+
+// added for css/static assets
+app.use(express.static(path.resolve("./public")));
+
 app.use(checkLoggedIn);
 app.use("/lilUrl",restrictTo("ADMIN", "NORMAL",""),urlRouter);
 app.use ("/users", userRouter);
