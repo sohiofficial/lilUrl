@@ -10,8 +10,15 @@ const staticRouter = require("./routes/staticRoute.js");
 const userRouter = require("./routes/users.js");
 const PORT = process.env.PORT || 8001;
 const path = require("path");
+const { syncCacheCountersToDb } = require("./services/syncCounters.js");
 
 mongoDbConnect(process.env.MONGODB_URI);
+setInterval(syncCacheCountersToDb, 60*1000);
+
+process.on("SIGTERM", async ()=>{
+    await syncCacheCountersToDb();
+    process.exit(0);
+})
 
 app.set("view engine", "ejs");
 app.set("views",path.resolve("./views"));
