@@ -57,7 +57,7 @@
                 <button type="submit">View History</button>
             </form>
 
-            <% if (locals.result) { %>
+            <% if (locals.result || locals.totalClicks) { %>
             <table>
                 <thead>
                     <th>short ID</th>
@@ -68,7 +68,7 @@
                     <tr>
                         <td><%= result.shortId %></td>
                         <td><%= result.redirectUrl %></td>
-                        <td><%= result.visitHistory.length %></td>
+                        <td><%= totalClicks %></td>
                     </tr>
                 </tbody>
             </table>
